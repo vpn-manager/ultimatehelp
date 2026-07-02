@@ -1,0 +1,90 @@
+{
+  "brand": "UltimateGuide",
+  "tagline": "Secure VPN setup guides for every device.",
+  "nav": {
+    "guides": "Guides",
+    "faq": "FAQ",
+    "about": "About"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ru": "Русский",
+    "fa": "فارسی"
+  },
+  "home": {
+    "heroTitle": "Set up your VPN in minutes",
+    "heroSubtitle": "Step-by-step, no-jargon guides.",
+    "browseGuides": "Browse all guides",
+    "chooseOs": "Choose your operating system",
+    "chooseApp": "Choose an app for {{os}}",
+    "changeOs": "Change",
+    "guidesAvailable_one": "{{count}} guide",
+    "guidesAvailable_other": "{{count}} guides"
+  },
+  "guides": {
+    "title": "All guides",
+    "subtitle": "Pick your platform and app to get started.",
+    "empty": "No guides published yet."
+  },
+  "app": {
+    "guides": "Guides",
+    "guidesAvailable": "View guides"
+  },
+  "guide": {
+    "difficulty": "Difficulty",
+    "setupTime": "Setup time",
+    "steps": "Steps",
+    "onThisPage": "On this page",
+    "stepList": "Step list",
+    "stepProgress": "Step {{current}} of {{total}}",
+    "fallbackNotice": "This guide isn't translated yet — showing the English version.",
+    "download": "Download"
+  },
+  "categories": {
+    "all": "All",
+    "setup": "Setup",
+    "update": "Update",
+    "advanced": "Advanced",
+    "troubleshooting": "Troubleshooting"
+  },
+  "copy": {
+    "idle": "Copy config link",
+    "copied": "Copied!",
+    "failed": "Copy failed"
+  },
+  "callout": {
+    "warning": "Warning",
+    "tip": "Pro Tip"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "q": "Is UltimateGuide free?",
+        "a": "Yes. Every guide on UltimateGuide is free to read and always will be."
+      },
+      {
+        "q": "Do you provide the VPN service itself?",
+        "a": "No. UltimateGuide only teaches you how to configure popular open-source clients. You bring your own server or subscription."
+      },
+      {
+        "q": "Which platforms are supported?",
+        "a": "Android, iOS, Windows and more — pick your operating system on the home page to see available guides."
+      }
+    ]
+  },
+  "about": {
+    "title": "About UltimateGuide",
+    "body": "UltimateGuide is an independent, community-driven project that publishes clear, trustworthy VPN setup guides. Every guide is written in Markdown, reviewed for accuracy, and statically published so the site stays fast and private."
+  },
+  "footer": {
+    "rights": "All guides are provided for educational purposes.",
+    "madeWith": "Built statically with Next.js & Markdown."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "We couldn't find that guide.",
+    "home": "Back to home"
+  }
+}

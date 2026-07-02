@@ -1,0 +1,71 @@
+name: Deploy ShieldGuard to GitHub Pages
+
+# Rebuild whenever guide Markdown, content, or source changes on the main branch.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.mjs'
+      - 'tailwind.config.ts'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+# Allow the workflow to publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one concurrent deployment; cancel superseded runs.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        # Uses `npm ci` when a committed package-lock.json exists (reproducible),
+        # otherwise falls back to `npm install` for the very first deploy.
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Build static site
+        # For a project page served at /<repo>, expose the base path so links
+        # and assets resolve. Harmless for user/custom-domain pages.
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ github.event.repository.name != format('{0}.github.io', github.repository_owner) && format('/{0}', github.event.repository.name) || '' }}
+        run: npm run build
+
+      - name: Disable Jekyll (serve _next assets)
+        run: touch out/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

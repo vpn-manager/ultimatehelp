@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: 26 54 93;
+  --color-primary-50: 239 244 255;
+  --color-primary-100: 204 219 244;
+  --color-primary-900: 19 41 74;
+  --color-success: 34 197 94;
+  --color-warning: 244 63 94;
+  --color-surface: 248 249 255;
+  --color-surface-low: 239 244 255;
+  --color-surface-dim: 204 219 244;
+}
+
+.dark {
+  --color-primary: 147 197 253;
+  --color-primary-50: 15 23 42;
+  --color-primary-100: 30 41 59;
+  --color-primary-900: 191 219 254;
+  --color-success: 74 222 128;
+  --color-warning: 251 113 133;
+  --color-surface: 15 23 42;
+  --color-surface-low: 30 41 59;
+  --color-surface-dim: 51 65 85;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-slate-700 antialiased dark:text-slate-200;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  }
+
+  html[lang='fa'] body {
+    font-family: var(--font-vazirmatn), Vazirmatn, var(--font-inter), system-ui, sans-serif;
+  }
+
+  /* RTL: nudge list markers and quotes to the correct side. */
+  [dir='rtl'] .prose-ultimateguide ul,
+  [dir='rtl'] .prose-ultimateguide ol {
+    padding-inline-start: 1.625em;
+  }
+}
+
+@layer components {
+  /* Branded Markdown callouts (rendered from `:::warning` / `:::tip`). */
+  .callout {
+    @apply my-6 rounded border px-4 py-3 text-sm leading-relaxed;
+  }
+  .callout > :first-child {
+    @apply mt-0;
+  }
+  .callout > :last-child {
+    @apply mb-0;
+  }
+  /* Label text is localised at build time and supplied via `data-label`. */
+  .callout::before {
+    content: attr(data-label);
+    @apply mb-1 block text-xs font-semibold uppercase tracking-wide;
+  }
+
+  .callout-warning {
+    @apply border-warning/30 bg-warning/10 text-rose-900 dark:text-rose-100;
+  }
+  .callout-warning::before {
+    @apply text-warning;
+  }
+
+  .callout-tip {
+    @apply border-success/30 bg-success/10 text-emerald-900 dark:text-emerald-100;
+  }
+  .callout-tip::before {
+    @apply text-emerald-600;
+  }
+
+  /* Touch-friendly base for interactive elements. */
+  .tap-target {
+    @apply inline-flex min-h-touch min-w-touch items-center justify-center;
+  }
+
+  .dark .prose-ultimateguide {
+    --tw-prose-body: #cbd5e1;
+    --tw-prose-headings: rgb(var(--color-primary));
+    --tw-prose-links: rgb(var(--color-primary));
+    --tw-prose-bold: #f8fafc;
+    --tw-prose-counters: rgb(var(--color-primary));
+    --tw-prose-bullets: rgb(var(--color-surface-dim));
+    --tw-prose-hr: rgb(var(--color-surface-dim));
+    --tw-prose-quotes: #e2e8f0;
+    --tw-prose-code: #f8fafc;
+    --tw-prose-pre-bg: #020617;
+  }
+}
