@@ -26,6 +26,7 @@ import {
 } from './types';
 
 const GUIDES_DIR = path.join(process.cwd(), 'content', 'guides');
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 const CALLOUT_LABELS: Record<Locale, { warning: string; tip: string }> = {
   en: { warning: 'Warning', tip: 'Pro Tip' },
@@ -72,6 +73,43 @@ function rehypeCollectSteps(steps: GuideStep[]) {
   };
 }
 
+function withBasePath(url: string): string {
+  if (!BASE_PATH || !url.startsWith('/') || url.startsWith('//') || url.startsWith(`${BASE_PATH}/`)) {
+    return url;
+  }
+  return `${BASE_PATH}${url}`;
+}
+
+function withBasePathSrcSet(srcSet: string): string {
+  return srcSet
+    .split(',')
+    .map((candidate) => {
+      const trimmed = candidate.trim();
+      const [url, ...descriptor] = trimmed.split(/\s+/);
+      return [withBasePath(url), ...descriptor].join(' ');
+    })
+    .join(', ');
+}
+
+function rehypeBasePath() {
+  return (tree: unknown) => {
+    visit(tree as any, 'element', (node: any) => {
+      const properties = node.properties;
+      if (!properties) return;
+
+      for (const key of ['src', 'href', 'poster']) {
+        if (typeof properties[key] === 'string') {
+          properties[key] = withBasePath(properties[key]);
+        }
+      }
+
+      if (typeof properties.srcSet === 'string') {
+        properties.srcSet = withBasePathSrcSet(properties.srcSet);
+      }
+    });
+  };
+}
+
 function toText(node: any): string {
   if (node.type === 'text') return node.value as string;
   if (!node.children) return '';
@@ -90,6 +128,7 @@ async function renderMarkdown(
     .use(remarkCallouts, locale)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
+    .use(rehypeBasePath)
     .use(rehypeSlug)
     .use(rehypeCollectSteps, steps)
     .use(rehypeStringify)
