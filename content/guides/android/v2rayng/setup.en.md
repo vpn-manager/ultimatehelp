@@ -7,12 +7,8 @@ setupTime: "5 mins"
 locale: "en"
 order: 1
 category: "setup"
-directDownloadUrl: "https://play.google.com/store/apps/details?id=com.v2ray.ang"
+directDownloadUrl: "https://github.com/2dust/v2rayNG/releases/download/2.2.5/v2rayNG_2.2.5_universal.apk"
 ---
-
-🛒 [Download from Play Store](https://play.google.com/store/apps/details?id=com.v2ray.ang)
-
-🐈‍⬛️ [Download from GitHub](https://github.com/2dust/v2rayNG/releases/download/1.8.38/v2rayNG_1.8.38_armeabi-v7a.apk)
 
 ## Adding a Subscription Link
 1. Open the bot and use the service management button to get your subscription link. Then copy the link.

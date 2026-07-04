@@ -7,12 +7,9 @@ setupTime: "5 мин"
 locale: "ru"
 order: 1
 category: "setup"
-directDownloadUrl: "https://play.google.com/store/apps/details?id=com.v2ray.ang"
+directDownloadUrl: "https://github.com/2dust/v2rayNG/releases/download/2.2.5/v2rayNG_2.2.5_universal.apk"
 ---
 
-🛒 [Скачать из Play Store](https://play.google.com/store/apps/details?id=com.v2ray.ang)
-
-🐈‍⬛️ [Скачать с GitHub](https://github.com/2dust/v2rayNG/releases/download/1.8.38/v2rayNG_1.8.38_armeabi-v7a.apk)
 
 ## Добавление ссылки на подписку
 1. Откройте бота и с помощью кнопки управления сервисом получите ссылку на подписку. Затем скопируйте ссылку.
