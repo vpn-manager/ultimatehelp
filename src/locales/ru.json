@@ -40,6 +40,7 @@
     "onThisPage": "На этой странице",
     "stepList": "Список шагов",
     "stepProgress": "Шаг {{current}} из {{total}}",
+    "relatedGuides": "Другие инструкции",
     "fallbackNotice": "Эта инструкция ещё не переведена — показана английская версия.",
     "download": "Скачать"
   },

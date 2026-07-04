@@ -38,6 +38,7 @@
     "onThisPage": "در این صفحه",
     "stepList": "فهرست مراحل",
     "stepProgress": "مرحله {{current}} از {{total}}",
+    "relatedGuides": "راهنماهای مرتبط",
     "fallbackNotice": "این راهنما هنوز ترجمه نشده است — نسخه انگلیسی نمایش داده می‌شود.",
     "download": "دانلود"
   },

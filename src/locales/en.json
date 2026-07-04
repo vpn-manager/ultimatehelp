@@ -38,6 +38,7 @@
     "onThisPage": "On this page",
     "stepList": "Step list",
     "stepProgress": "Step {{current}} of {{total}}",
+    "relatedGuides": "Related guides",
     "fallbackNotice": "This guide isn't translated yet — showing the English version.",
     "download": "Download"
   },

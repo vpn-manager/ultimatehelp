@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 import { useLocale } from './Providers';
-import GuideStepper from './GuideStepper';
 import MarkdownContent from './MarkdownContent';
-import { AppIcon, DownloadIcon, OsIcon, prettyApp, prettyOs } from './icons';
+import { AppIcon, CategoryIcon, DownloadIcon, OsIcon, prettyApp, prettyOs } from './icons';
 import { localizePath } from '@/lib/locale-paths';
-import type { GuideVariant } from '@/lib/types';
+import type { AppGuides, Category, GuideVariant } from '@/lib/types';
 import { DEFAULT_LOCALE } from '@/lib/types';
 
 function prettyGuideLabel(value: string) {
@@ -19,7 +18,7 @@ function prettyGuideLabel(value: string) {
     .join(' ');
 }
 
-export default function GuideView({ guide }: { guide: GuideVariant }) {
+export default function GuideView({ guide, app }: { guide: GuideVariant; app: AppGuides }) {
   const { t } = useTranslation();
   const { locale } = useLocale();
 
@@ -30,6 +29,7 @@ export default function GuideView({ guide }: { guide: GuideVariant }) {
   const guideLabel = fm.category
     ? t(`categories.${fm.category}`, { defaultValue: prettyGuideLabel(fm.category) })
     : prettyGuideLabel(guide.guide);
+  const relatedGuides = app.guides.filter((candidate) => candidate.guide !== guide.guide);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -59,22 +59,26 @@ export default function GuideView({ guide }: { guide: GuideVariant }) {
         </div>
         <h1 className="text-3xl font-bold text-primary md:text-4xl">{fm.title}</h1>
 
-        {fm.category && (
-          <span className="mt-2 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-            {t(`categories.${fm.category}`)}
-          </span>
-        )}
+        {(fm.category || fm.downloadUrl) && (
+          <div className="mt-4 flex flex-wrap items-center gap-4">
+            {fm.category && (
+              <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+                {t(`categories.${fm.category}`)}
+              </span>
+            )}
 
-        {fm.downloadUrl && (
-          <a
-            href={fm.downloadUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
-          >
-            <DownloadIcon className="h-4 w-4" />
-            {t('guide.download')}
-          </a>
+            {fm.downloadUrl && (
+              <a
+                href={fm.downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+              >
+                <DownloadIcon className="h-4 w-4" />
+                {t('guide.download')}
+              </a>
+            )}
+          </div>
         )}
 
         {usedFallback && (
@@ -84,11 +88,53 @@ export default function GuideView({ guide }: { guide: GuideVariant }) {
         )}
       </header>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_16rem]">
-        <aside className="order-first lg:order-last">
-          <GuideStepper steps={content.steps} />
-        </aside>
-        <article className="order-last min-w-0 lg:order-first">
+      <div className={relatedGuides.length > 0 ? 'grid grid-cols-1 gap-8 lg:grid-cols-[1fr_16rem]' : ''}>
+        {relatedGuides.length > 0 && (
+          <aside className="order-last lg:order-last">
+            <nav
+              aria-label={t('guide.relatedGuides')}
+              className="space-y-3 lg:sticky lg:top-24"
+            >
+              <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+                {t('guide.relatedGuides')}
+              </h2>
+              <ul className="space-y-2">
+                {relatedGuides.map((related) => {
+                  const relatedContent =
+                    related.locales[locale] ??
+                    related.locales[DEFAULT_LOCALE] ??
+                    Object.values(related.locales)[0];
+                  if (!relatedContent) return null;
+
+                  const category = relatedContent.frontmatter.category as Category | undefined;
+                  const label = category
+                    ? t(`categories.${category}`, {
+                        defaultValue: prettyGuideLabel(category),
+                      })
+                    : relatedContent.frontmatter.title;
+
+                  return (
+                    <li key={related.guide}>
+                      <Link
+                        href={localizePath(
+                          `/guides/${related.os}/${related.app}/${related.guide}`,
+                          locale,
+                        )}
+                        className="group flex items-center gap-3 rounded-xl border border-surface-dim bg-white p-3 text-sm font-semibold text-primary transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md dark:bg-slate-900"
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                          <CategoryIcon category={category ?? 'setup'} className="h-4 w-4" />
+                        </span>
+                        <span>{label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </aside>
+        )}
+        <article className="order-first min-w-0 lg:order-first">
           <MarkdownContent key={`${guide.os}/${guide.app}/${guide.guide}/${locale}`} html={content.html} />
         </article>
       </div>
