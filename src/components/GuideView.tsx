@@ -18,6 +18,12 @@ function prettyGuideLabel(value: string) {
     .join(' ');
 }
 
+function storeLabelKey(os: string) {
+  if (os === 'android') return 'guide.googlePlay';
+  if (os === 'ios' || os === 'macos') return 'guide.appStore';
+  return 'guide.store';
+}
+
 export default function GuideView({ guide, app }: { guide: GuideVariant; app: AppGuides }) {
   const { t } = useTranslation();
   const { locale } = useLocale();
@@ -26,6 +32,7 @@ export default function GuideView({ guide, app }: { guide: GuideVariant; app: Ap
     guide.locales[locale] ?? guide.locales[DEFAULT_LOCALE] ?? Object.values(guide.locales)[0]!;
   const usedFallback = !guide.locales[locale];
   const fm = content.frontmatter;
+  const directDownloadUrl = fm.directDownloadUrl ?? fm.downloadUrl;
   const guideLabel = fm.category
     ? t(`categories.${fm.category}`, { defaultValue: prettyGuideLabel(fm.category) })
     : prettyGuideLabel(guide.guide);
@@ -59,7 +66,7 @@ export default function GuideView({ guide, app }: { guide: GuideVariant; app: Ap
         </div>
         <h1 className="text-3xl font-bold text-primary md:text-4xl">{fm.title}</h1>
 
-        {(fm.category || fm.downloadUrl) && (
+        {(fm.category || directDownloadUrl || fm.storeUrl) && (
           <div className="mt-4 flex flex-wrap items-center gap-4">
             {fm.category && (
               <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -67,15 +74,27 @@ export default function GuideView({ guide, app }: { guide: GuideVariant; app: Ap
               </span>
             )}
 
-            {fm.downloadUrl && (
+            {directDownloadUrl && (
               <a
-                href={fm.downloadUrl}
+                href={directDownloadUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
               >
                 <DownloadIcon className="h-4 w-4" />
-                {t('guide.download')}
+                {t('guide.directDownload')}
+              </a>
+            )}
+
+            {fm.storeUrl && (
+              <a
+                href={fm.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded border border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+              >
+                <DownloadIcon className="h-4 w-4" />
+                {t(storeLabelKey(guide.os))}
               </a>
             )}
           </div>

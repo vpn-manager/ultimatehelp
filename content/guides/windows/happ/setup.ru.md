@@ -7,7 +7,7 @@ setupTime: "2 мин"
 locale: "ru"
 order: 1
 category: "setup"
-downloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+directDownloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
 ---
 
 ## Добавление ссылки на подписку

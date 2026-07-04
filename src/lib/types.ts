@@ -25,8 +25,12 @@ export interface GuideFrontmatter {
   order?: number;
   /** Optional category for filtering guides. */
   category?: Category;
-  /** Optional direct download link for the app. */
+  /** @deprecated Use directDownloadUrl for new guides. */
   downloadUrl?: string;
+  /** Optional direct download link for an installer or package. */
+  directDownloadUrl?: string;
+  /** Optional App Store, Google Play, or other store link. */
+  storeUrl?: string;
 }
 
 /** A single rendered guide for one locale. */

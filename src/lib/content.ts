@@ -12,6 +12,7 @@ import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
 
 import {
+  CATEGORIES,
   DEFAULT_LOCALE,
   LOCALES,
   type AppGuides,
@@ -279,12 +280,16 @@ export async function getAllApps(): Promise<AppGuides[]> {
     appMap.get(appKey)!.guides.push(variant);
   }
 
-  // Sort guides within each app by order, then by guide name
+  // Keep guide cards in the same category order used by the locale files.
   for (const app of appMap.values()) {
     app.guides.sort((a, b) => {
+      const categoryA = a.locales[DEFAULT_LOCALE]?.frontmatter.category;
+      const categoryB = b.locales[DEFAULT_LOCALE]?.frontmatter.category;
+      const categoryOrderA = categoryA ? CATEGORIES.indexOf(categoryA) : CATEGORIES.length;
+      const categoryOrderB = categoryB ? CATEGORIES.indexOf(categoryB) : CATEGORIES.length;
       const oa = a.locales[DEFAULT_LOCALE]?.frontmatter.order ?? 0;
       const ob = b.locales[DEFAULT_LOCALE]?.frontmatter.order ?? 0;
-      return oa - ob || a.guide.localeCompare(b.guide);
+      return categoryOrderA - categoryOrderB || oa - ob || a.guide.localeCompare(b.guide);
     });
   }
 

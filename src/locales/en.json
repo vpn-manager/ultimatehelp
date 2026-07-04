@@ -40,7 +40,11 @@
     "stepProgress": "Step {{current}} of {{total}}",
     "relatedGuides": "Related guides",
     "fallbackNotice": "This guide isn't translated yet — showing the English version.",
-    "download": "Download"
+    "download": "Download",
+    "directDownload": "Direct download",
+    "appStore": "Download from the App Store",
+    "googlePlay": "Get it on Google Play",
+    "store": "Download from the store"
   },
   "categories": {
     "all": "All",

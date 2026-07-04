@@ -7,7 +7,7 @@ setupTime: "۲ دقیقه"
 locale: "fa"
 order: 1
 category: "update"
-downloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+directDownloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
 ---
 
 

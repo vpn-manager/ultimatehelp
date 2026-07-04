@@ -7,7 +7,7 @@ setupTime: "2 mins"
 locale: "en"
 order: 2
 category: "update"
-downloadUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+storeUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
 ---
 
 ## Updating the Subscription Link

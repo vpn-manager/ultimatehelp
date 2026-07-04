@@ -7,7 +7,7 @@ setupTime: "2 mins"
 locale: "en"
 order: 1
 category: "setup"
-downloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+directDownloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
 ---
 
 ## Adding a Subscription Link

@@ -7,7 +7,7 @@ setupTime: "5 mins"
 locale: "en"
 order: 1
 category: "setup"
-downloadUrl: "https://play.google.com/store/apps/details?id=com.v2ray.ang"
+directDownloadUrl: "https://play.google.com/store/apps/details?id=com.v2ray.ang"
 ---
 
 🛒 [Download from Play Store](https://play.google.com/store/apps/details?id=com.v2ray.ang)

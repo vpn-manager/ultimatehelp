@@ -17,6 +17,12 @@ const CATEGORY_COLORS: Record<Category, { bg: string; border: string; text: stri
   troubleshooting: { bg: 'bg-rose-50 dark:bg-rose-950/30', border: 'border-l-rose-500', text: 'text-rose-700 dark:text-rose-300' },
 };
 
+function storeLabelKey(os: string) {
+  if (os === 'android') return 'guide.googlePlay';
+  if (os === 'ios' || os === 'macos') return 'guide.appStore';
+  return 'guide.store';
+}
+
 export default function AppView({ app }: { app: AppGuides }) {
   const { t } = useTranslation();
   const { locale } = useLocale();
@@ -26,6 +32,7 @@ export default function AppView({ app }: { app: AppGuides }) {
     ? firstGuide.locales[locale] ?? firstGuide.locales[DEFAULT_LOCALE] ?? Object.values(firstGuide.locales)[0]
     : null;
   const primaryFm = primaryContent?.frontmatter;
+  const directDownloadUrl = primaryFm?.directDownloadUrl ?? primaryFm?.downloadUrl;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -51,16 +58,31 @@ export default function AppView({ app }: { app: AppGuides }) {
           </div>
         </div>
 
-        {primaryFm?.downloadUrl && (
-          <a
-            href={primaryFm.downloadUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2.5 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white shadow-md shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]"
-          >
-            <DownloadIcon className="h-4 w-4" />
-            {t('guide.download')} {prettyApp(app.app)}
-          </a>
+        {(directDownloadUrl || primaryFm?.storeUrl) && (
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            {directDownloadUrl && (
+              <a
+                href={directDownloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white shadow-md shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]"
+              >
+                <DownloadIcon className="h-4 w-4" />
+                {t('guide.directDownload')}
+              </a>
+            )}
+            {primaryFm?.storeUrl && (
+              <a
+                href={primaryFm.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary/10 active:scale-[0.98]"
+              >
+                <DownloadIcon className="h-4 w-4" />
+                {t(storeLabelKey(app.os))}
+              </a>
+            )}
+          </div>
         )}
       </header>
 

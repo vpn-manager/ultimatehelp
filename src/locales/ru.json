@@ -42,7 +42,11 @@
     "stepProgress": "Шаг {{current}} из {{total}}",
     "relatedGuides": "Другие инструкции",
     "fallbackNotice": "Эта инструкция ещё не переведена — показана английская версия.",
-    "download": "Скачать"
+    "download": "Скачать",
+    "directDownload": "Скачать напрямую",
+    "appStore": "Скачать в App Store",
+    "googlePlay": "Скачать в Google Play",
+    "store": "Скачать из магазина"
   },
   "categories": {
     "all": "Все",

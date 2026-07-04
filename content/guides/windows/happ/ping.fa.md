@@ -7,7 +7,7 @@ setupTime: "۲ دقیقه"
 locale: "fa"
 order: 1
 category: "ping"
-downloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+directDownloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
 ---
 
 ## مرتب کردن سرور‌ها بر اساس پینگ

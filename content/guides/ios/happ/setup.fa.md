@@ -7,12 +7,10 @@ setupTime: "۲ دقیقه"
 locale: "fa"
 order: 1
 category: "setup"
-downloadUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+storeUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
 ---
 
 ✔️ به iOS 14.0  به بالا یا آخرین نسخه‌ی Mac OS نیاز دارد.
-
-[🛒 دانلود از اپ استور (App Store)](https://apps.apple.com/us/app/happ-proxy-utility/id6504287215)
 
 ## اضافه کردن لینک اتصال (subscription)
 ۱- وارد ربات شوید و با استفاده از دکمه‌ی مدیریت سرویس لینک اتصال (subscription) خود را دریافت کنید. سپس لینک مورد نظر را کپی کنید.

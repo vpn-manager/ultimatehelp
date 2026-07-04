@@ -40,7 +40,11 @@
     "stepProgress": "مرحله {{current}} از {{total}}",
     "relatedGuides": "راهنماهای مرتبط",
     "fallbackNotice": "این راهنما هنوز ترجمه نشده است — نسخه انگلیسی نمایش داده می‌شود.",
-    "download": "دانلود"
+    "download": "دانلود",
+    "directDownload": "دانلود مستقیم",
+    "appStore": "دانلود از اپ استور",
+    "googlePlay": "دانلود از گوگل پلی",
+    "store": "دانلود از فروشگاه"
   },
   "categories": {
     "all": "همه",

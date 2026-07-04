@@ -7,7 +7,7 @@ setupTime: "2 mins"
 locale: "en"
 order: 1
 category: "setup"
-downloadUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+storeUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
 ---
 
 ✔️ Requires iOS 14.0 or later, or the latest version of macOS.

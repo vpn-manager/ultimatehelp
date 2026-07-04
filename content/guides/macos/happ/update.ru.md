@@ -7,7 +7,8 @@ setupTime: "2 мин"
 locale: "ru"
 order: 1
 category: "update"
-downloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+directDownloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+storeUrl: "https://apps.apple.com/tr/app/happ-proxy-utility/id6504287215"
 ---
 
 

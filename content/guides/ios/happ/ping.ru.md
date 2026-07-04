@@ -7,7 +7,7 @@ setupTime: "2 мин"
 locale: "ru"
 order: 1
 category: "ping"
-downloadUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+storeUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
 ---
 
 ## Сортировка серверов по пингу

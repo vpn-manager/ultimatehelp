@@ -7,7 +7,8 @@ setupTime: "۲ دقیقه"
 locale: "fa"
 order: 1
 category: "setup"
-downloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+directDownloadUrl: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg"
+storeUrl: "https://apps.apple.com/tr/app/happ-proxy-utility/id6504287215"
 ---
 
 ## اضافه کردن لینک اتصال (subscription)

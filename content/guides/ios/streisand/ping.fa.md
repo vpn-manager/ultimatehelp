@@ -7,7 +7,7 @@ setupTime: "۵ دقیقه"
 locale: "fa"
 order: 1
 category: "ping"
-downloadUrl: "https://apps.apple.com/us/app/streisand/id6450534064"
+storeUrl: "https://apps.apple.com/us/app/streisand/id6450534064"
 ---
 
 ## مرتب کردن سرور‌ها بر اساس پینگ

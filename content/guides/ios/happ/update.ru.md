@@ -7,7 +7,7 @@ setupTime: "2 мин"
 locale: "ru"
 order: 2
 category: "update"
-downloadUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+storeUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
 ---
 
 ## Обновление ссылки на подписку

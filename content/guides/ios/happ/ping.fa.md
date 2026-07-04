@@ -7,7 +7,7 @@ setupTime: "۲ دقیقه"
 locale: "fa"
 order: 1
 category: "ping"
-downloadUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+storeUrl: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
 ---
 
 ## مرتب کردن سرور‌ها بر اساس پینگ

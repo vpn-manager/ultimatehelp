@@ -7,7 +7,7 @@ setupTime: "۵ دقیقه"
 locale: "fa"
 order: 1
 category: "setup"
-downloadUrl: "https://apps.apple.com/us/app/streisand/id6450534064"
+storeUrl: "https://apps.apple.com/us/app/streisand/id6450534064"
 ---
 
 ✔️ به iOS 14.0  به بالا یا آخرین نسخه‌ی Mac OS نیاز دارد.

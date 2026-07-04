@@ -7,7 +7,7 @@ setupTime: "2 mins"
 locale: "en"
 order: 1
 category: "setup"
-downloadUrl: "https://apps.apple.com/tr/app/streisand/id6450534064"
+storeUrl: "https://apps.apple.com/tr/app/streisand/id6450534064"
 ---
 
 ✔️ Requires iOS 14.0 or later, or the latest version of macOS.
