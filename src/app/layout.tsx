@@ -6,7 +6,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import './globals.css';
 import Providers from '@/components/Providers';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 config.autoAddCss = false;
 
@@ -28,7 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Header />
           <main className="flex-1">{children}</main>
-          <Footer />
         </Providers>
       </body>
     </html>
