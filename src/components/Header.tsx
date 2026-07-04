@@ -3,12 +3,12 @@
 import { faBars, faMoon, faShieldHalved, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useTheme } from './Providers';
+import { useLocale, useTheme } from './Providers';
 import LanguageSwitcher from './LanguageSwitcher';
+import { localizePath, stripBasePath, stripLocaleFromPathname } from '@/lib/locale-paths';
 
 const NAV = [
   { href: '/guides', key: 'nav.guides' },
@@ -18,16 +18,24 @@ const NAV = [
 
 export default function Header() {
   const { t } = useTranslation();
+  const { locale } = useLocale();
   const { theme, toggleTheme } = useTheme();
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [currentPath, setCurrentPath] = useState('/');
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  useEffect(() => {
+    const updatePath = () => setCurrentPath(stripLocaleFromPathname(stripBasePath(window.location.pathname)));
+    updatePath();
+    window.addEventListener('popstate', updatePath);
+    return () => window.removeEventListener('popstate', updatePath);
+  }, []);
+
+  const isActive = (href: string) => currentPath === href || currentPath.startsWith(`${href}/`);
 
   return (
     <header className="sticky top-0 z-40 border-b border-surface-dim/60 bg-surface/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-4">
-        <Link href="/" className="flex min-w-0 items-center gap-2 font-bold text-primary">
+        <Link href={localizePath('/', locale)} className="flex min-w-0 items-center gap-2 font-bold text-primary">
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded bg-surface-low ring-1 ring-surface-dim/70">
             <FontAwesomeIcon icon={faShieldHalved} className="h-5 w-5" aria-hidden="true" />
           </span>
@@ -38,7 +46,8 @@ export default function Header() {
           {NAV.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={localizePath(item.href, locale)}
+              onClick={() => setCurrentPath(item.href)}
               className={`tap-target rounded px-3 text-sm font-medium transition-colors ${
                 isActive(item.href)
                   ? 'bg-surface-low text-primary'
@@ -79,8 +88,11 @@ export default function Header() {
           {NAV.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
+              href={localizePath(item.href, locale)}
+              onClick={() => {
+                setCurrentPath(item.href);
+                setOpen(false);
+              }}
               className={`tap-target w-full justify-start rounded px-3 text-sm font-medium ${
                 isActive(item.href) ? 'bg-surface-low text-primary' : 'text-slate-600 dark:text-slate-300'
               }`}

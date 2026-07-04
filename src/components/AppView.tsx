@@ -5,12 +5,14 @@ import { useTranslation } from 'react-i18next';
 
 import { useLocale } from './Providers';
 import { AppIcon, CategoryIcon, DownloadIcon, OsIcon, prettyApp, prettyOs } from './icons';
+import { localizePath } from '@/lib/locale-paths';
 import type { AppGuides, Category } from '@/lib/types';
 import { DEFAULT_LOCALE } from '@/lib/types';
 
 const CATEGORY_COLORS: Record<Category, { bg: string; border: string; text: string }> = {
   setup: { bg: 'bg-blue-50 dark:bg-blue-950/30', border: 'border-l-blue-500', text: 'text-blue-700 dark:text-blue-300' },
   update: { bg: 'bg-amber-50 dark:bg-amber-950/30', border: 'border-l-amber-500', text: 'text-amber-700 dark:text-amber-300' },
+  ping: { bg: 'bg-emerald-50 dark:bg-emerald-950/30', border: 'border-l-emerald-500', text: 'text-emerald-700 dark:text-emerald-300' },
   advanced: { bg: 'bg-purple-50 dark:bg-purple-950/30', border: 'border-l-purple-500', text: 'text-purple-700 dark:text-purple-300' },
   troubleshooting: { bg: 'bg-rose-50 dark:bg-rose-950/30', border: 'border-l-rose-500', text: 'text-rose-700 dark:text-rose-300' },
 };
@@ -28,7 +30,7 @@ export default function AppView({ app }: { app: AppGuides }) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <nav className="mb-6 text-sm text-slate-500 dark:text-slate-400">
-        <Link href="/guides" className="hover:text-primary transition-colors">{t('nav.guides')}</Link>
+        <Link href={localizePath('/guides', locale)} className="hover:text-primary transition-colors">{t('nav.guides')}</Link>
         <span className="mx-2 text-slate-300 dark:text-slate-600">/</span>
         <span className="text-primary font-medium">{prettyApp(app.app)}</span>
       </nav>
@@ -78,7 +80,7 @@ export default function AppView({ app }: { app: AppGuides }) {
             return (
               <Link
                 key={guide.guide}
-                href={`/guides/${app.os}/${app.app}/${guide.guide}`}
+                href={localizePath(`/guides/${app.os}/${app.app}/${guide.guide}`, locale)}
                 className={`group relative overflow-hidden rounded-xl border border-surface-dim border-l-4 bg-white p-6 transition-all hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40 dark:bg-slate-900 ${
                   colors ? colors.border : 'border-l-primary'
                 }`}

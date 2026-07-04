@@ -3,8 +3,12 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
+import { useLocale } from '@/components/Providers';
+import { localizePath } from '@/lib/locale-paths';
+
 export default function NotFound() {
   const { t } = useTranslation();
+  const { locale } = useLocale();
 
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center px-4 py-24 text-center">
@@ -12,7 +16,7 @@ export default function NotFound() {
       <h1 className="mt-4 text-2xl font-bold text-primary">{t('notFound.title')}</h1>
       <p className="mt-2 text-slate-500 dark:text-slate-400">{t('notFound.body')}</p>
       <Link
-        href="/"
+        href={localizePath('/', locale)}
         className="tap-target mt-8 rounded bg-primary px-6 text-base font-semibold text-white hover:bg-primary-900"
       >
         {t('notFound.home')}

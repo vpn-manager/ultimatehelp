@@ -45,6 +45,7 @@
     "all": "All",
     "setup": "Setup",
     "update": "Update",
+    "ping": "Ping Test",
     "advanced": "Advanced",
     "troubleshooting": "Troubleshooting"
   },

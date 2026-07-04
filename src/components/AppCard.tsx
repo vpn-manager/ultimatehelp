@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useLocale } from './Providers';
 import { AppIcon, OsIcon, prettyApp, prettyOs } from './icons';
+import { localizePath } from '@/lib/locale-paths';
 import type { AppSummary } from '@/lib/types';
 import { DEFAULT_LOCALE } from '@/lib/types';
 
@@ -15,7 +16,7 @@ export default function AppCard({ app }: { app: AppSummary }) {
 
   return (
     <Link
-      href={`/guides/${app.os}/${app.app}`}
+      href={localizePath(`/guides/${app.os}/${app.app}`, locale)}
       className="group flex items-center gap-3 rounded border border-surface-dim bg-white p-5 transition-shadow hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/40 dark:bg-slate-900"
     >
       <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-surface-low text-primary ring-1 ring-surface-dim/70">

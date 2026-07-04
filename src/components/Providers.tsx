@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { I18nextProvider } from 'react-i18next';
 
 import i18n, { getInitialLocale, isRtl, STORAGE_KEY } from '@/lib/i18n';
+import { getLocaleFromPathname, stripBasePath } from '@/lib/locale-paths';
 import { DEFAULT_LOCALE, type Locale } from '@/lib/types';
 
 type Theme = 'light' | 'dark';
@@ -59,7 +60,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   // Hydrate from storage / browser once mounted (avoids SSR mismatch).
   useEffect(() => {
-    const initial = getInitialLocale();
+    const pathLocale = getLocaleFromPathname(stripBasePath(window.location.pathname));
+    const initial = pathLocale ?? getInitialLocale();
     setLocaleState(initial);
     void i18n.changeLanguage(initial);
 

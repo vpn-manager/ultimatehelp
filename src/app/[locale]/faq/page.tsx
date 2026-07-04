@@ -1,5 +1,5 @@
 import FaqView from '@/components/FaqView';
 
-export default function FaqPage() {
+export default function LocalizedFaqPage() {
   return <FaqView />;
 }

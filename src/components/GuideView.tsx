@@ -7,8 +7,17 @@ import { useLocale } from './Providers';
 import GuideStepper from './GuideStepper';
 import MarkdownContent from './MarkdownContent';
 import { AppIcon, DownloadIcon, OsIcon, prettyApp, prettyOs } from './icons';
+import { localizePath } from '@/lib/locale-paths';
 import type { GuideVariant } from '@/lib/types';
 import { DEFAULT_LOCALE } from '@/lib/types';
+
+function prettyGuideLabel(value: string) {
+  return value
+    .split(/[-_]/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+}
 
 export default function GuideView({ guide }: { guide: GuideVariant }) {
   const { t } = useTranslation();
@@ -18,18 +27,21 @@ export default function GuideView({ guide }: { guide: GuideVariant }) {
     guide.locales[locale] ?? guide.locales[DEFAULT_LOCALE] ?? Object.values(guide.locales)[0]!;
   const usedFallback = !guide.locales[locale];
   const fm = content.frontmatter;
+  const guideLabel = fm.category
+    ? t(`categories.${fm.category}`, { defaultValue: prettyGuideLabel(fm.category) })
+    : prettyGuideLabel(guide.guide);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       {/* Breadcrumb */}
       <nav className="mb-4 text-sm text-slate-500 dark:text-slate-400">
-        <Link href="/guides" className="hover:text-primary">{t('nav.guides')}</Link>
+        <Link href={localizePath('/guides', locale)} className="hover:text-primary">{t('nav.guides')}</Link>
         <span className="mx-2">/</span>
-        <Link href={`/guides/${guide.os}/${guide.app}`} className="hover:text-primary">
+        <Link href={localizePath(`/guides/${guide.os}/${guide.app}`, locale)} className="hover:text-primary">
           {prettyApp(guide.app)}
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-primary font-medium">{fm.title}</span>
+        <span className="text-primary font-medium">{guideLabel}</span>
       </nav>
 
       {/* Header */}

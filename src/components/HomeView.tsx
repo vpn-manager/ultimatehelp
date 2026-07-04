@@ -5,11 +5,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AppCard from './AppCard';
+import { useLocale } from './Providers';
 import { OsIcon, prettyOs } from './icons';
+import { localizePath } from '@/lib/locale-paths';
 import type { AppSummary } from '@/lib/types';
 
 export default function HomeView({ apps }: { apps: AppSummary[] }) {
   const { t } = useTranslation();
+  const { locale } = useLocale();
   const [selectedOs, setSelectedOs] = useState<string | null>(null);
 
   const byOs = new Map<string, AppSummary[]>();
@@ -80,7 +83,7 @@ export default function HomeView({ apps }: { apps: AppSummary[] }) {
 
       <section className="pb-16 text-center">
         <Link
-          href="/guides"
+          href={localizePath('/guides', locale)}
           className="tap-target rounded px-4 text-sm font-medium text-slate-500 underline-offset-4 hover:text-primary hover:underline dark:text-slate-400"
         >
           {t('home.browseGuides')}

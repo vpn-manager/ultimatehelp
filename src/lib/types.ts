@@ -6,8 +6,8 @@ export const RTL_LOCALES: Locale[] = ['fa'];
 
 export type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 
-export type Category = 'setup' | 'update' | 'advanced' | 'troubleshooting';
-export const CATEGORIES: Category[] = ['setup', 'update', 'advanced', 'troubleshooting'];
+export type Category = 'setup' | 'update' | 'ping' | 'advanced' | 'troubleshooting';
+export const CATEGORIES: Category[] = ['setup', 'update', 'ping', 'advanced', 'troubleshooting'];
 
 /** Frontmatter parsed from each guide Markdown file. */
 export interface GuideFrontmatter {

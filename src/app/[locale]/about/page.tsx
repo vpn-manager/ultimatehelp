@@ -1,5 +1,5 @@
 import AboutView from '@/components/AboutView';
 
-export default function AboutPage() {
+export default function LocalizedAboutPage() {
   return <AboutView />;
 }
