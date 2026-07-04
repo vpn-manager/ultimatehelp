@@ -26,7 +26,9 @@ import {
 } from './types';
 
 const GUIDES_DIR = path.join(process.cwd(), 'content', 'guides');
+const PUBLIC_DIR = path.join(process.cwd(), 'public');
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const OPTIMIZABLE_IMAGE_EXTENSIONS = /\.(?:png|jpe?g)$/i;
 
 const CALLOUT_LABELS: Record<Locale, { warning: string; tip: string }> = {
   en: { warning: 'Warning', tip: 'Pro Tip' },
@@ -80,6 +82,27 @@ function withBasePath(url: string): string {
   return `${BASE_PATH}${url}`;
 }
 
+function withWebpAsset(url: string): string {
+  if (!url.startsWith('/') || url.startsWith('//')) {
+    return url;
+  }
+
+  const match = url.match(/^([^?#]+)([?#].*)?$/);
+  const pathname = match?.[1] ?? url;
+  const suffix = match?.[2] ?? '';
+
+  if (!OPTIMIZABLE_IMAGE_EXTENSIONS.test(pathname)) {
+    return url;
+  }
+
+  const webpPathname = pathname.replace(OPTIMIZABLE_IMAGE_EXTENSIONS, '.webp');
+  if (!fs.existsSync(path.join(PUBLIC_DIR, webpPathname))) {
+    return url;
+  }
+
+  return `${webpPathname}${suffix}`;
+}
+
 function withBasePathSrcSet(srcSet: string): string {
   return srcSet
     .split(',')
@@ -91,11 +114,30 @@ function withBasePathSrcSet(srcSet: string): string {
     .join(', ');
 }
 
+function withWebpAssetSrcSet(srcSet: string): string {
+  return srcSet
+    .split(',')
+    .map((candidate) => {
+      const trimmed = candidate.trim();
+      const [url, ...descriptor] = trimmed.split(/\s+/);
+      return [withWebpAsset(url), ...descriptor].join(' ');
+    })
+    .join(', ');
+}
+
 function rehypeBasePath() {
   return (tree: unknown) => {
     visit(tree as any, 'element', (node: any) => {
       const properties = node.properties;
       if (!properties) return;
+
+      if (node.tagName === 'img' && typeof properties.src === 'string') {
+        properties.src = withWebpAsset(properties.src);
+      }
+
+      if (node.tagName === 'source' && typeof properties.srcSet === 'string') {
+        properties.srcSet = withWebpAssetSrcSet(properties.srcSet);
+      }
 
       for (const key of ['src', 'href', 'poster']) {
         if (typeof properties[key] === 'string') {
