@@ -1,4 +1,11 @@
-import { faAndroid, faApple, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons';
+import {
+  faAndroid,
+  faApple,
+  faGooglePlay,
+  faLinux,
+  faMicrosoft,
+  faWindows,
+} from '@fortawesome/free-brands-svg-icons';
 import {
   faCat,
   faDesktop,
@@ -66,6 +73,19 @@ export function prettyApp(app: string): string {
 
 export function DownloadIcon({ className = 'h-4 w-4' }: { className?: string }) {
   return <FontAwesomeIcon icon={faDownload} className={className} aria-hidden="true" />;
+}
+
+export function StoreIcon({ os, className = 'h-4 w-4' }: { os: string; className?: string }) {
+  const icon =
+    os === 'android'
+      ? faGooglePlay
+      : os === 'ios' || os === 'macos'
+        ? faApple
+        : os === 'windows'
+          ? faMicrosoft
+          : faDownload;
+
+  return <FontAwesomeIcon icon={icon} className={className} aria-hidden="true" />;
 }
 
 export function CategoryIcon({ category, className = 'h-4 w-4' }: { category: string; className?: string }) {

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useLocale } from './Providers';
 import MarkdownContent from './MarkdownContent';
-import { AppIcon, CategoryIcon, DownloadIcon, OsIcon, prettyApp, prettyOs } from './icons';
+import { AppIcon, CategoryIcon, DownloadIcon, OsIcon, prettyApp, prettyOs, StoreIcon } from './icons';
 import { localizePath } from '@/lib/locale-paths';
 import type { AppGuides, Category, GuideVariant } from '@/lib/types';
 import { DEFAULT_LOCALE } from '@/lib/types';
@@ -93,7 +93,7 @@ export default function GuideView({ guide, app }: { guide: GuideVariant; app: Ap
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded border border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
               >
-                <DownloadIcon className="h-4 w-4" />
+                <StoreIcon os={guide.os} className="h-4 w-4" />
                 {t(storeLabelKey(guide.os))}
               </a>
             )}

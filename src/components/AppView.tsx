@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 import { useLocale } from './Providers';
-import { AppIcon, CategoryIcon, DownloadIcon, OsIcon, prettyApp, prettyOs } from './icons';
+import { AppIcon, CategoryIcon, DownloadIcon, OsIcon, prettyApp, prettyOs, StoreIcon } from './icons';
 import { localizePath } from '@/lib/locale-paths';
 import type { AppGuides, Category } from '@/lib/types';
 import { DEFAULT_LOCALE } from '@/lib/types';
@@ -78,7 +78,7 @@ export default function AppView({ app }: { app: AppGuides }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary/10 active:scale-[0.98]"
               >
-                <DownloadIcon className="h-4 w-4" />
+                <StoreIcon os={app.os} className="h-4 w-4" />
                 {t(storeLabelKey(app.os))}
               </a>
             )}
